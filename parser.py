@@ -66,7 +66,10 @@ class SaleItem(object):
 		self.specification_url = get_value(tree, '//a[contains(@class, \'card__info-details\')]/@href')
 		self.seller_comment = get_value(tree, '//div[contains(@class, \'seller-details__text\')]/text()')
 		
-		self.year = get_value(tree, u'//dt[text()= \'\u0413\u043e\u0434 \u0432\u044b\u043f\u0443\u0441\u043a\u0430\']/following::text()')
+		self.year = get_value(tree, u'//dt[text()= \'Год выпуска\']/following::text()')
+		self.mileage = get_value(tree, u'//dt[text()= \'Пробег\']/following::text()')
+		self.body = get_value(tree, u'//dt[text()= \'Кузов\']/following::text()')
+		self.transmission = get_value(tree, u'//dt[text()= \'Коробка\']/following::text()')
 
 
 
@@ -81,6 +84,6 @@ if __name__ == '__main__':
 	tree = etree.parse(f, parser)
 	
 	item = SaleItem(tree)
-	print item.year
+	print item.year, item.body, item.transmission
 	#search_list = SearchList(tree)
 	#print search_list.items[0].price
