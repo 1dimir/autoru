@@ -1,3 +1,4 @@
+#!/usr/local/env python
 # -*- coding: utf-8 -*-
 
 from lxml import etree
@@ -69,7 +70,7 @@ class SaleItem(object):
         self.body = ''
         self.transmission = ''
 
-        if not tree is None:
+        if not document_tree is None:
             self.parse(document_tree)
 
 
@@ -83,6 +84,31 @@ class SaleItem(object):
         self.mileage = get_value(document_tree, u'//dt[text()= \'Пробег\']/following::text()')
         self.body = get_value(document_tree, u'//dt[text()= \'Кузов\']/following::text()')
         self.transmission = get_value(document_tree, u'//dt[text()= \'Коробка\']/following::text()')
+        self.color = get_value(document_tree, u'//dt[text()= \'Цвет\']/following::text()')
+        self.drive= get_value(document_tree, u'//dt[text()= \'Привод\']/following::text()')
+        self.engine_volume = get_value(document_tree, u'//dt[text()= \'Двигатель\']/following-sibling::dd/span[1]/text()')
+        self.engine_hp = get_value(document_tree, u'//dt[text()= \'Двигатель\']/following-sibling::dd/span[2]/text()')
+        self.engine_type = get_value(document_tree, u'//dt[text()= \'Двигатель\']/following-sibling::dd/span[3]/text()')
+        self.steering = get_value(document_tree, u'//dt[text()= \'Руль\']/following::text()')
+        self.condition = get_value(document_tree, u'//dt[text()= \'Состояние\']/following::text()')
+        self.owners = get_value(document_tree, u'//dt[text()= \'Владельцы\']/following::text()')
+        self.certificate = get_value(document_tree, u'//dt[text()= \'ПТС\']/following::text()')
+        self.tenure = get_value(document_tree, u'//dt[text()= \'Владение\']/following::text()')
+        self.customs = get_value(document_tree, u'//dt[text()= \'Таможня\']/following::text()')
+        self.exchange = get_value(document_tree, u'//dt[text()= \'Обмен\']/following::text()')
+        self.vin = get_value(document_tree, u'//dt[text()= \'VIN\']/following::text()')
+        self.autocode = get_value(document_tree, u'//dt[text()= \'Автокод\']/following::text()')
+
+        self.location = get_value(document_tree, u'//div[contains(@class, \'sale-location\')]/text()')
+        self.seller = ' '.join(
+            document_tree.xpath(u'//dt[text() = \'Продавец\']/following-sibling::dd[1]//text()')
+        )
+
+    
+
+
+
+
 
 
 
